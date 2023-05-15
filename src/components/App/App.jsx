@@ -4,6 +4,7 @@ import Searchbar from '../Searchbar/Searchbar';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import LoadMoreBtn from '../Button/Button';
+import Modal from '../Modal/Modal';
 import SearchImages from 'services/pixabay-api';
 import { AppContainer } from '../App/App.styled';
 import { Error } from '../Error/Error.styled';
@@ -17,6 +18,7 @@ class App extends Component {
     error: null,
     isEmpty: false,
     showBtn: false,
+    showModal: false,
   };
 
   componentDidMount() {}
@@ -52,6 +54,13 @@ class App extends Component {
     }
   }
 
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   handleSubmit = value => {
     console.log(value);
     this.setState({
@@ -61,6 +70,7 @@ class App extends Component {
       isEmpty: false,
       showBtn: false,
       error: null,
+      showModal: false,
     });
   };
 
@@ -69,7 +79,8 @@ class App extends Component {
   };
 
   render() {
-    const { images, isLoading, error, isEmpty, showBtn } = this.state;
+    const { images, isLoading, error, isEmpty, showBtn, showModal } =
+      this.state;
 
     return (
       <AppContainer>
@@ -77,8 +88,9 @@ class App extends Component {
         {isLoading && <Loader />}
         {error && <Error>{error.message}</Error>}
         {isEmpty && <Error>No images found</Error>}
-        <ImageGallery images={images} />
+        <ImageGallery images={images} openModal={this.openModal} />
         {showBtn && <LoadMoreBtn handleLoadMore={this.handleLoadMore} />}
+        {showModal && <Modal />}
         <ToastContainer autoClose={2500} />
       </AppContainer>
     );

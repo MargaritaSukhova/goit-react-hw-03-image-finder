@@ -7,24 +7,28 @@ export const BtnContainer = styled.div`
 `;
 
 export const Btn = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
+  padding: 8px 16px;
+  border-radius: 2px;
+  background-color: #3f51b5;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  border: 0;
+  text-decoration: none;
   cursor: pointer;
-  width: 150px;
-  height: 50px;
-  background-image: linear-gradient(to top, #d8d9db 0%, #fff 80%, #fdfdfd 100%);
-  border-radius: 30px;
-  border: 1px solid #8f9092;
-  transition: all 0.2s ease;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #606060;
-  text-shadow: 0 1px #fff;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  min-width: 180px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   &:hover {
-    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1,
-      0 -6px 4px #fefefe, inset 0 0 3px 3px #cecfd1;
+    background-color: #303f9f;
+  }
+  &:focus {
+    background-color: #303f9f;
   }
 `;

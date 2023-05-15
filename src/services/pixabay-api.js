@@ -1,5 +1,5 @@
 const BASE_URL = 'https://pixabay.com/api/';
-const KEY = '34919786-dfee031f92fa2ae99264bebb';
+const KEY = '34919786-dfee0391f92fa2ae99264bebb';
 const PER_PAGE = '12';
 
 const SearchImages = (query, page) => {
