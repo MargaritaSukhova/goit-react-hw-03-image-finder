@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +13,9 @@ import {
 class Searchbar extends Component {
   state = {
     value: '',
+  };
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
   };
 
   handleChange = e => {

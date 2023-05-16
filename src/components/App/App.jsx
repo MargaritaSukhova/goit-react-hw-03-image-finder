@@ -19,6 +19,8 @@ class App extends Component {
     isEmpty: false,
     showBtn: false,
     showModal: false,
+    largeImageURL: '',
+    tags: '',
   };
 
   componentDidMount() {}
@@ -54,15 +56,14 @@ class App extends Component {
     }
   }
 
-  openModal = () => {
-    this.setState({ showModal: true });
+  openModal = (largeImageURL, tags) => {
+    this.setState({ showModal: true, largeImageURL, tags });
   };
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
   handleSubmit = value => {
-    console.log(value);
     this.setState({
       value,
       page: 1,
@@ -71,6 +72,7 @@ class App extends Component {
       showBtn: false,
       error: null,
       showModal: false,
+      largeImageURL: '',
     });
   };
 
@@ -79,8 +81,16 @@ class App extends Component {
   };
 
   render() {
-    const { images, isLoading, error, isEmpty, showBtn, showModal } =
-      this.state;
+    const {
+      images,
+      isLoading,
+      error,
+      isEmpty,
+      showBtn,
+      showModal,
+      largeImageURL,
+      tags,
+    } = this.state;
 
     return (
       <AppContainer>
@@ -88,9 +98,19 @@ class App extends Component {
         {isLoading && <Loader />}
         {error && <Error>{error.message}</Error>}
         {isEmpty && <Error>No images found</Error>}
-        <ImageGallery images={images} openModal={this.openModal} />
+        <ImageGallery
+          images={images}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+        />
         {showBtn && <LoadMoreBtn handleLoadMore={this.handleLoadMore} />}
-        {showModal && <Modal />}
+        {showModal && (
+          <Modal
+            tags={tags}
+            largeImageURL={largeImageURL}
+            closeModal={this.closeModal}
+          />
+        )}
         <ToastContainer autoClose={2500} />
       </AppContainer>
     );
