@@ -23,20 +23,12 @@ class App extends Component {
     tags: '',
   };
 
-  componentDidMount() {}
-
   componentDidUpdate(prevProps, prevState) {
     const { value, page } = this.state;
 
     if (prevState.value !== value || prevState.page !== page) {
       this.setState({ isLoading: true });
       SearchImages(value, page)
-        .then(response => {
-          if (!response.ok) {
-            return Promise.reject(new Error('Something went wrong'));
-          }
-          return response.json();
-        })
         .then(({ hits, totalHits }) => {
           if (!hits.length) {
             this.setState({ isEmpty: true });
@@ -48,8 +40,6 @@ class App extends Component {
           }));
         })
         .catch(error => {
-          console.log(error);
-          console.log(error.message);
           this.setState({ error });
         })
         .finally(() => this.setState({ isLoading: false }));

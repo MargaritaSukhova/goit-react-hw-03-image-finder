@@ -5,7 +5,12 @@ const PER_PAGE = '12';
 const SearchImages = (query, page) => {
   return fetch(
     `${BASE_URL}?q=${query}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=${PER_PAGE}`
-  );
+  ).then(response => {
+    if (!response.ok) {
+      return Promise.reject(new Error('Something went wrong'));
+    }
+    return response.json();
+  });
 };
 
 export default SearchImages;
